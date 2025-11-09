@@ -20,7 +20,8 @@
     "resolveJsonModule": true
   },
   "include": [
-    "tests-my/**/*.ts",
+    "tests/tests-ui/**/*.ts",
+    "tests/tests-api/**/*.ts",
     "playwright.config.ts"
   ],
   "exclude": [

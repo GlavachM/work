@@ -12,7 +12,7 @@ import { defineConfig, devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests-my',
+  testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -26,7 +26,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'https://www.saucedemo.com',
+
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -36,19 +36,34 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome']},
-      
+      testMatch: /.*ui.spec.ts/,
+      use: {
+        ...devices['Desktop Chrome'],
+        baseURL: 'https://www.saucedemo.com'
+      },
     },
 
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      testMatch: /.*ui.spec.ts/,
+      use: { ...devices['Desktop Firefox'],
+         baseURL: 'https://www.saucedemo.com'
+       },
     },
 
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      testMatch: /.*ui.spec.ts/,
+      use: { ...devices['Desktop Safari'],
+         baseURL: 'https://www.saucedemo.com'
+       },
     },
+
+    {
+      name: 'tests-api',
+      testMatch: /.*api.spec.ts/,
+      use: {baseURL: 'https://restful-booker.herokuapp.com'}
+    }
 
     /* Test against mobile viewports. */
     // {

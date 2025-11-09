@@ -1,5 +1,5 @@
-import {test, expect} from '../fixtures/my-test';
-import credentials from '../testdata/credentials.json'; 
+import {test, expect} from '../../fixtures/my-test';
+import credentials from '../../testdata/credentials.json'; 
 
 // test.describe.configure({ mode: 'parallel' });
 

@@ -1,5 +1,5 @@
-import {test, expect} from '../fixtures/my-test';
-import credentials from '../testdata/credentials.json'; 
+import {test, expect} from '../../fixtures/my-test';
+import credentials from '../../testdata/credentials.json'; 
 
 test('Add item to basket', async({ page, loginPage, productPage}) => {
     await loginPage.login(credentials.problemUser.username, credentials.problemUser.password);
