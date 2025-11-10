@@ -39,7 +39,7 @@ jobs:
       uses: actions/upload-artifact@v4    
       with:
             name: blob-traces-${{ matrix.shardIndex }}
-            path: blob-results
+            path: blob-report
             retention-days: 1
 
   merge-reports:
