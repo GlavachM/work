@@ -38,8 +38,8 @@ jobs:
       if: ${{ !cancelled() }}
       uses: actions/upload-artifact@v4    
       with:
-            name: blop-traces-${{ matrix.shardIndex }}
-            path: test-results/
+            name: blob-traces-${{ matrix.shardIndex }}
+            path: blob-results
             retention-days: 1
 
   merge-reports:
