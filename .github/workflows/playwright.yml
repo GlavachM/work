@@ -34,6 +34,12 @@ jobs:
         name: blob-report-${{ matrix.shardIndex }}
         path: blob-report
         retention-days: 1
+    - name: Upload Playwright traces (optional, if needed for manual download)
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: blop-playwright-traces-${{ matrix.shardIndex }}
+        path: test-results.zip # Adjust path if traces are in a different location    
   merge-reports:
     # Merge reports after playwright-tests, even if some shards have failed
     if: ${{ !cancelled() }}
@@ -64,4 +70,21 @@ jobs:
         name: html-report--attempt-${{ github.run_attempt }}
         path: playwright-report
         retention-days: 14
+
+    - name: Download trace blob reports from GitHub Actions Artifacts
+      uses: actions/download-artifact@v5
+      with:
+        path: all-blop-playwright-traces
+        pattern: blop-playwright-traces-*
+        merge-multiple: true
+
+    - name: Merge into Trace Report
+      run: npx playwright merge-reports --reporter trace ./all-blop-playwright-traces
+
+    - name: Upload Trace report
+      uses: actions/upload-artifact@v4
+      with:
+        name: trace-report--attempt-${{ github.run_attempt }}
+        path: playwright-trace
+        retention-days: 14    
         
